@@ -1,5 +1,6 @@
 // listen for auth status change
 auth.onAuthStateChanged(user => {
+  setupUI(user);
   if (user) {
     db.collection("guides")
       .get()
