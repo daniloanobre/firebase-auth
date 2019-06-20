@@ -9,6 +9,7 @@ adminForm.addEventListener("submit", e => {
   const addAdminRole = functions.httpsCallable("addAdminRole");
   addAdminRole({ email: adminEmail })
     .then(result => {
+      adminForm.querySelector(".error").innerHTML = result.data.error;
       console.log(result);
     })
     .catch(err => {
@@ -82,8 +83,11 @@ signupForm.addEventListener("submit", e => {
       const modal = document.querySelector("#modal-signup");
       M.Modal.getInstance(modal).close();
       signupForm.reset();
+      signupForm.querySelector(".error").innerHTML = "";
     })
-    .catch(err => console.log(err.message));
+    .catch(err => {
+      signupForm.querySelector(".error").innerHTML = err.message;
+    });
 });
 
 // logout
@@ -107,6 +111,9 @@ loginForm.addEventListener("submit", e => {
       const modal = document.querySelector("#modal-login");
       M.Modal.getInstance(modal).close();
       loginForm.reset();
+      loginForm.querySelector(".error").innerHTML = "";
     })
-    .catch(err => console.log(err.message));
+    .catch(err => {
+      loginForm.querySelector(".error").innerHTML = err.message;
+    });
 });
